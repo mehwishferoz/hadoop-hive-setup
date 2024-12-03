@@ -15,16 +15,13 @@ This repository documents the step-by-step process of setting up Hadoop and Hive
   - [Hadoop 3.2.4](https://hadoop.apache.org/release/3.2.4.html)
   - [Apache Hive 3.1.2](https://archive.apache.org/dist/hive/hive-3.1.2/)
 
-> **Important:** Please ensure to download these exact specified versions from the provided links (or use the files uploaded in this repo) to avoid version compatibility issues. These versions have been tested and work well together.
-
-> **Note:** I have uploaded all the necessary files required for this setup to this repository. You can simply **git clone** the repo to get all the files instead of downloading them from the respective websites.
+> **Important:** Please ensure to download these exact specified versions from the provided links to avoid version compatibility issues. These versions have been tested and work well together.
 
 ---
 
 ## 📁 Directory Structure
 - `README.md`: Main documentation.
 - `config-files`: Configuration files like `core-site.xml` and `hive-site.xml`.
-- `misc`: All the zip files used in this setup.
 
 ---
 
