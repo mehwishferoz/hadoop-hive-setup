@@ -15,15 +15,7 @@ This repository documents the step-by-step process of setting up Hadoop and Hive
   - [Hadoop 3.2.4](https://hadoop.apache.org/release/3.2.4.html)
   - [Apache Hive 3.1.2](https://archive.apache.org/dist/hive/hive-3.1.2/)
 
----
-
-## 📜 Steps
-1. [Java Installation](#java-installation)
-2. [Hadoop Installation](#hadoop-installation)
-3. [Hive Installation](#hive-installation)
-4. [Testing Your Setup](#testing-your-setup)
-5. [Troubleshooting](#troubleshooting)
-
+> **Note:** Please ensure to download these exact specified versions from the provided links to avoid version compatibility issues. These versions have been tested and work well together.
 ---
 
 ## 📁 Directory Structure
@@ -36,10 +28,11 @@ This repository documents the step-by-step process of setting up Hadoop and Hive
 Follow the detailed steps in this README to complete your setup successfully.
 
 ---
+
 ## ☕ Java Installation
 
 ### **Step 1: Download Java JDK**
-1. Visit the [Java JDK 8+ Download Page](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
+1. Visit the [Java JDK 8](https://www.oracle.com/in/java/technologies/javase/javase8-archive-downloads.html).
 2. Select the appropriate version for your Windows system:
    - **x64 Installer** for 64-bit Windows.
    - **x86 Installer** for 32-bit Windows.
@@ -59,6 +52,7 @@ Follow the detailed steps in this README to complete your setup successfully.
    - **Variable Value**: Path to your JDK folder (e.g., `C:\Java\jdk-<version>`).
 3. Edit the `Path` variable:
    - Add `%JAVA_HOME%\bin` to the list.
+> Note: Replace the path with the actual path to jdk folder in your system
 
 ### **Step 4: Verify Installation**
 1. Open a Command Prompt (`Win + R`, then type `cmd`).
@@ -82,9 +76,187 @@ javac 1.8.0_431
 ```
    
 ### **🛠️ Troubleshooting**
-If java -version does not work:
+If `java -version` does not work:
   - Ensure the JAVA_HOME path is correct.
   - Ensure %JAVA_HOME%\bin is added to the Path variable.
 
 ---
+
+## 🐘 Hadoop Installation
+
+### **Step 1: Download Hadoop**
+1. Visit [Hadoop 3.2.4](https://hadoop.apache.org/release/3.2.4.html).
+2. Download the specified version of Hadoop (i.e., Hadoop 3.2.4).
+3. Extract the downloaded `.tar.gz` file into a directory, such as `C:\Hadoop`.
+> **Important:** When extracting the `.tar.gz` file, ensure the path does not have spaces. Extract the files into a directory like `C:\Hadoop` and **rename the folder** if it is something like `hadoop-3.2.4` to just `Hadoop` for consistency.
+
+---
+
+### **Step 2: Set Environment Variables**
+1. Open **Control Panel** → **System** → **Advanced System Settings** → **Environment Variables**.
+2. Under **System Variables**, click **New**:
+   - **Variable Name**: `HADOOP_HOME`
+   - **Variable Value**: Path to your hadoop bin folder (e.g., `C:\hadoop\bin`).
+3. Edit the `Path` variable:
+   - Add `C:\hadoop\bin` to the list.
+   - Add `C:\hadoop\sbin` to the list.
+
+---
+
+### **Step 3: Configure Hadoop**
+1. **Edit `hadoop-env.cmd`:**
+   - Navigate to `C:\Hadoop\etc\hadoop\`.
+   - Open `hadoop-env.cmd` in a text editor.
+   - Set the `JAVA_HOME` variable to your Java installation path:
+     ```cmd
+     set JAVA_HOME=C:\Java\jdk-<version>
+     ```
+> Note: Replace the path with the actual path to jdk folder in your system
+
+2. **Configure `core-site.xml`:**
+   - Open `C:\Hadoop\etc\hadoop\core-site.xml` and add the following configuration:
+     ```xml
+     <configuration>
+         <property>
+             <name>fs.defaultFS</name>
+             <value>hdfs://localhost:9000</value>
+         </property>
+     </configuration>
+     ```
+
+3. **Configure `hdfs-site.xml`:**
+   - Before editing the `hdfs-site.xml` file, **create a new folder** called `data` in `C:\Hadoop`, and inside this `data` folder, create **two subfolders** named `namenode` and `datanode`. 
+   - **Note:** Ensure all folder names are in small letters and make sure the spelling is correct.
+   - Now, open `C:\Hadoop\etc\hadoop\hdfs-site.xml` and add the following configuration:
+     ```xml
+     <configuration>
+         <property>
+             <name>dfs.replication</name>
+             <value>1</value>
+         </property>
+         <property>
+             <name>dfs.namenode.name.dir</name>
+             <value>C:\hadoop\data\namenode</value>
+         </property>
+         <property>
+             <name>dfs.datanode.data.dir</name>
+             <value>C:\hadoop\data\datanode</value>
+         </property>
+     </configuration>
+     ```
+4. **Configure `mapred-site.xml`:**
+   - Open `C:\Hadoop\etc\hadoop\mapred-site.xml` and add the following configuration:
+     ```xml
+     <configuration>
+         <property>
+             <name>mapreduce.framework.name</name>
+             <value>yarn</value>
+         </property>
+     </configuration>
+     ```
+
+5. **Configure `yarn-site.xml`:**
+   - Open `C:\Hadoop\etc\hadoop\yarn-site.xml` and add the following configuration:
+     ```xml
+     <configuration>
+         <property>
+             <name>yarn.nodemanager.aux-services</name>
+             <value>mapreduce_shuffle</value>
+         </property>
+     
+         <property>
+             <name>yarn.nodemanager.auxservices.mapreduce.shuffle.class</name>
+             <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+         </property>
+     </configuration>
+     ```
+6. **Download and Replace `bin` Folder**
+    - Download the `bin` zip file from this [Google Drive link](https://drive.google.com/drive/folders/1iURNbow2IglhAhSy3sfY5xxVfAg33NBW).
+    - Extract the `bin` folder from the downloaded zip file.
+    - Navigate to `C:\Hadoop`.
+    - Delete the existing `bin` folder.
+    - Paste the newly downloaded `bin` folder into the `C:\Hadoop` directory, replacing the old one.
+
+---
+
+### **Step 4: Start Hadoop Services**
+1. **Run Command Prompt as Administrator:**
+   - Right-click on the Command Prompt and select **Run as Administrator**.
+
+2. **Navigate to the `sbin` directory:**
+   - Open Command Prompt as Administrator.
+   - Navigate to the `sbin` directory:
+     ```bash
+     cd C:\Hadoop\sbin
+     ```
+
+3. **Stop Hadoop Services:**
+   - Stop the Hadoop Distributed File System (HDFS) and YARN:
+     ```bash
+     stop-dfs.cmd
+     stop-yarn.cmd
+     ```
+
+4. **Format the DataNode and NameNode:**
+   - Format the DataNode:
+     ```bash
+     hdfs datanode -format
+     ```
+   - Format the NameNode:
+     ```bash
+     hdfs namenode -format
+     ```
+
+5. **Start Hadoop Services:**
+   - Start the Hadoop Distributed File System (HDFS) and YARN:
+     ```bash
+     start-dfs.cmd
+     start-yarn.cmd
+     ```
+
+---
+
+### **Step 5: Verify Hadoop Services with `jps` Command**
+
+1. **Verify if Hadoop services are running:**
+   - After starting the Hadoop services, run the `jps` command to check the status of the running processes:
+     ```bash
+     jps
+     ```
+
+2. **Expected Output:**
+   - The output should look similar to this:
+     ```plaintext
+     21728 Jps
+     13524 NameNode
+     16520 DataNode
+     17180 NodeManager
+     5628 ResourceManager
+     ```
+
+   - If you see these processes listed, it means Hadoop services are running correctly.
+
+---
+
+### **Step 5: Access Hadoop Dashboards**
+
+1. **NameNode Web UI:**
+   - Open your browser and visit:
+     ```plaintext
+     http://localhost:9870
+     ```
+   - This is the **NameNode Web UI**, where you can monitor the HDFS.
+
+2. **Hadoop Cluster Resource Manager:**
+   - Open your browser and visit:
+     ```plaintext
+     http://localhost:8088/cluster
+     ```
+   - This is the **Hadoop Cluster Resource Manager**, where you can monitor YARN applications and resources.
+
+---
+
+## References
+[Hadoop installation](https://youtu.be/knAS0w-jiUk?si=dBKXVLkTpXZSS3__)
+
 Happy Coding 🪄
