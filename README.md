@@ -257,6 +257,6 @@ If `java -version` does not work:
 ---
 
 ## References
-[Hadoop installation](https://youtu.be/knAS0w-jiUk?si=dBKXVLkTpXZSS3__)
+[Hadoop installation](https://youtu.be/kUX6dCbdU3Q?si=-_hkhwl7UMi_RWXA)
 
 Happy Coding 🪄
