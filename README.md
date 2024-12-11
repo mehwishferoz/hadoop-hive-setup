@@ -347,7 +347,7 @@ a) Navigate to C:\hive\bin and run the following command:
 hive --service schematool -dbType derby -initSchema
 ```
 
-### **11. Start Hive
+### **11. Start Hive**
 a) Start Hive by running:
 
 ```bash
