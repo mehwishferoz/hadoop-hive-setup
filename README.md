@@ -48,7 +48,7 @@ Follow the detailed steps in this README to complete your setup successfully.
 
 ### **Step 3: Set Environment Variables**
 1. Open **Control Panel** → **System** → **Advanced System Settings** → **Environment Variables**.
-2. Under **System Variables**, click **New**:
+2. Under **User Variables**, click **New**:
    - **Variable Name**: `JAVA_HOME`
    - **Variable Value**: Path to your JDK folder (e.g., `C:\Java\jdk-<version>`).
 3. Edit the `Path` variable:
@@ -95,7 +95,7 @@ If `java -version` does not work:
 
 ### **Step 2: Set Environment Variables**
 1. Open **Control Panel** → **System** → **Advanced System Settings** → **Environment Variables**.
-2. Under **System Variables**, click **New**:
+2. Under **User Variables**, click **New**:
    - **Variable Name**: `HADOOP_HOME`
    - **Variable Value**: Path to your hadoop bin folder (i.e., `C:\hadoop`).
 3. Edit the `Path` variable:
@@ -272,7 +272,7 @@ b) Extract the file using WinRar, 7Zip, or similar software.
 c) Copy the extracted folder to `C:\` and rename it to `hive` (e.g., `C:\hive`).  
 d) Navigate to `C:\derby\lib` and copy all the `*.jar` files.  
 e) Paste the copied `*.jar` files into `C:\hive\lib`.  
-f) Download the exact `hive-site.xml` file from my [Google Drive](#).  
+f) Download the exact `hive-site.xml` file from my [Google Drive](https://drive.google.com/file/d/1_h8dN46KK8zZf9yf2M2DBUfPR_IZl33T/view).  
 g) Copy the downloaded `hive-site.xml` file and paste it into the `C:\hive\conf` folder.
 
 ---
