@@ -305,10 +305,9 @@ b) Set the folder properties to grant all rights.
 ---
 
 ### **6. Download and Configure Wget**
-a) Download wget from [Eternally Bored](https://eternallybored.org/misc/wget/).  
-b) Extract the wget zip file.  
-c) Copy the extracted folder to `C:\` and rename it to `wget` (e.g., `C:\wget`).  
-d) Add `C:\wget` to the system `Path` variable.
+a) Download `wget.exe` from [Eternally Bored](https://eternallybored.org/misc/wget/1.21.4/64/wget.exe).  
+b) Copy `wget.exe` to `C:\wget`.  
+c) Add `C:\wget` to the system `Path` variable.
 
 ---
 
